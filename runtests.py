@@ -13,8 +13,8 @@ class VarnishTests(unittest.TestCase):
         self.assert_(map(lambda x: isinstance(x, float), (True,True)))
         
     def test_threading(self):
-        self.manager.run(('purge.url', '^/myrandomurl/$'), threaded=True)
-        self.assert_(self.manager.run('purge.list')[0][0].endswith('^/myrandomurl/$\n'))
+        self.manager.run(('ban.url', '^/myrandomurl/$'), threaded=True)
+        self.assert_(self.manager.run('ban.list')[0][0].endswith('^/myrandomurl/$\n'))
         
     def test_stats(self):
         self.assert_(isinstance(self.manager.run('stats')[0][0], dict))

@@ -89,18 +89,25 @@ class VarnishHandler(Telnet):
         self.fetch('param.set %s %s' % (param, value))
 
     # Purge methods
-    def purge_url(self, regex):
-        return self.fetch('purge.url %s' % regex)[1]
+    def ban_url(self, regex):
+        return self.fetch('ban.url %s' % regex)[1]
+    #backwards compatibility
+    purge_url = ban_url
+    
+    def ban_hash(self, regex):
+        return self.fetch('ban.hash %s' % regex)[1]
+    #backwards compatibility
+    purge_hash = ban_hash
 
-    def purge_hash(self, regex):
-        return self.fetch('purge.hash %s' % regex)[1]
-
-    def purge_list(self):
-        return self.fetch('purge.list')[1]
-        
-    def purge(self, *args):
+    def ban_list(self):
+        return self.fetch('ban.list')[1]
+    #backwards compatibility
+    purge_list = ban_list
+    def ban(self, *args):
         for field, operator, arg in args:
-            self.fetch('purge %s %s %s\n' % (field, operator, arg))[1]
+            self.fetch('ban %s %s %s\n' % (field, operator, arg))[1]
+    #backwards compatibility
+    purge = ban
 
 class ThreadedRunner(Thread):
     """

@@ -27,13 +27,13 @@ across multiple Varnish instances. Here are the features of this python module
   *  Uses ``telnetlib`` instead of raw sockets
   *  Implements ``threading`` module
   *  Can run commands across multiple Varnish instances
-  *  More comprehensive methods, closely matching the management API (``purge_*``, ``vcl_*``, etc.)
+  *  More comprehensive methods, closely matching the management API (``ban_*``, ``vcl_*``, etc.)
   *  Unittests
 
 Example::
 
   manager = VarnishManager( ('server1:6082', 'server2:6082') )
-  manager.run('purge.url', '^/$')
+  manager.run('ban.url', '^/$')
   manager.close()
   
 Testing::
